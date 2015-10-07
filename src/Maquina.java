@@ -10,17 +10,132 @@
  */
 public class Maquina {
     //variables para monto cada moneda
-    int cantMon100,cantMon200,cantMon500;
-    //tipos de cafe de la cafetera
-    String []TIPO_CAFE={"café negro","café claro","café expresso"};
+    int cantMon100,cantMon200,cantMon500,recipiente100,recipiente200,recipiente500,pago,vuelto;
+    //variable para cantidad de cafe
+    int cantCN,cantCC,cantCE;
     //nivel de azucar
     int nivelAzucar;
-    //vuelto del cliente
-    float vuelto;
+    //tipos de cafe de la cafetera
+    String []TIPO_CAFE={"café negro","café claro","café expresso"};
+    //dinero del cliente
+  
     
-    
-    public Maquina(int moneda1,int moneda2,int moneda3){
-        cantMon100=moneda1;
+    //inicializa las variables de la cafetera
+    // se indica nivel de azucar y tipos de cafe como valor a 100, cantidad de monedas 10
+    public Maquina(){
+        cantMon100=10;
+        cantMon200=10;
+        cantMon500=10;
+        nivelAzucar=100;
+        cantCN=100;
+        cantCC=100;
+        cantCE=100;
+        //recipiente para los 3 tipos de monedas
+        recipiente100=0;
+        recipiente200=0;
+        recipiente500=0;
+    }
+    //comprobar cafe disponible antes de operar
+    boolean comprobarCafe(int option){
+        boolean bool = false;
+        switch(option){
+            case 1:
+                    bool= cantCN>10;
+                break;
+            case 2:
+                    bool= cantCC>10;
+                break;
+            case 3:
+                    bool= cantCE>10;
+                break;
+        }
+        return bool;
+    }
+    boolean comprobarAzucar(){
+        return nivelAzucar>0;
+    }
+
+    public int getRecipiente100() {
+        return recipiente100;
+    }
+
+    public int getRecipiente200() {
+        return recipiente200;
+    }
+
+    public int getRecipiente500() {
+        return recipiente500;
     }
     
-}
+    public void setCantMon100(int cantMon100) {
+        this.cantMon100 = cantMon100;
+    }
+
+    public void setCantMon200(int cantMon200) {
+        this.cantMon200 = cantMon200;
+    }
+
+    public void setCantMon500(int cantMon500) {
+        this.cantMon500 = cantMon500;
+    }
+
+    public void setRecipiente100(int recipiente100) {
+        this.recipiente100 += recipiente100;
+    }
+
+    public void setRecipiente200(int recipiente200) {
+        this.recipiente200 += recipiente200;
+    }
+
+    public void setRecipiente500(int recipiente500) {
+        this.recipiente500 += recipiente500;
+    }
+
+    public void setCantCN(int cantCN) {
+        this.cantCN = cantCN;
+    }
+
+    public void setCantCC(int cantCC) {
+        this.cantCC = cantCC;
+    }
+
+    public void setCantCE(int cantCE) {
+        this.cantCE = cantCE;
+    }
+
+    public void setNivelAzucar(int nivelAzucar) {
+        this.nivelAzucar = nivelAzucar;
+    }
+    public void setPago(int pago){
+        this.pago=pago;
+    }
+    
+    void darVuelto(int vuelto){
+        int aux=0,aux1=0,aux2=0,aux3=0;
+        
+        
+        if(vuelto>=500){
+            if(vuelto/500>0){
+                aux=vuelto%500;
+                aux1+=vuelto/500;
+                if(aux>=200){
+                    if(aux/200>0){
+                      aux=aux%200;
+                      aux2+=aux/200;  
+                    }
+                    if(aux>=100){
+                            if(aux/100>0){
+                                aux=aux%100;
+                                aux3+=aux/100;
+                            }
+                        }
+                }
+            }
+
+        }
+
+        System.out.println("monedas de 500: "+aux1+" monedas de 200: "+aux2+" monedas de 100: "+aux3);
+        }
+    }
+
+
