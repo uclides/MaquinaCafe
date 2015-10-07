@@ -66,17 +66,29 @@ public class Maquina {
     public int getRecipiente500() {
         return recipiente500;
     }
+
+    public int getCantMon100() {
+        return cantMon100;
+    }
+
+    public int getCantMon200() {
+        return cantMon200;
+    }
+
+    public int getCantMon500() {
+        return cantMon500;
+    }
     
     public void setCantMon100(int cantMon100) {
-        this.cantMon100 = cantMon100;
+        this.cantMon100 -= cantMon100;
     }
 
     public void setCantMon200(int cantMon200) {
-        this.cantMon200 = cantMon200;
+        this.cantMon200 -= cantMon200;
     }
 
     public void setCantMon500(int cantMon500) {
-        this.cantMon500 = cantMon500;
+        this.cantMon500 -= cantMon500;
     }
 
     public void setRecipiente100(int recipiente100) {
@@ -111,30 +123,29 @@ public class Maquina {
     }
     
     void darVuelto(int vuelto){
-        int aux=0,aux1=0,aux2=0,aux3=0;
-        
-        
-        if(vuelto>=500){
-            if(vuelto/500>0){
-                aux=vuelto%500;
-                aux1+=vuelto/500;
-                if(aux>=200){
-                    if(aux/200>0){
-                      aux=aux%200;
-                      aux2+=aux/200;  
-                    }
-                    if(aux>=100){
-                            if(aux/100>0){
-                                aux=aux%100;
-                                aux3+=aux/100;
-                            }
-                        }
-                }
+        int aux,aux1=0,aux2=0,aux3=0;
+        aux=vuelto;
+        do{   
+            if(aux>=500){
+                aux=aux%500;
+                aux1++;
             }
-
+            else if(aux>=200 && aux<500){
+                aux=aux%200;
+                aux2++;
+            }
+            else if(aux>=100&& aux<200){
+                aux=aux%100;
+                aux3++;
+                    }
         }
+        while(aux!=0);
+        System.out.println("monedas de 500: "+getCantMon500()+" monedas de 200: "+getCantMon200()+" monedas de 100: "+getCantMon100());
+            setCantMon500(aux1);
+            setCantMon200(aux2);
+            setCantMon100(aux3);
+        System.out.println("ACTUALES monedas de 500: "+getCantMon500()+" monedas de 200: "+getCantMon200()+" monedas de 100: "+getCantMon100());
 
-        System.out.println("monedas de 500: "+aux1+" monedas de 200: "+aux2+" monedas de 100: "+aux3);
         }
     }
 
